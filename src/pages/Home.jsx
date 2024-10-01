@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Stack, Box, Button, TextField } from '@mui/material';
-import { getUser,userReposLanguages } from '../store/slices/userSlice';
+import { getUser,userReposLanguages,setUserNotFound } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const Home = () => {
@@ -12,6 +12,7 @@ const Home = () => {
   };
   const handleButtonClick = () => {
     if (userName) {
+      dispatch(setUserNotFound());
       dispatch(getUser(userName));
       dispatch(userReposLanguages(userName));
       navigate(`/resume/${userName}`);

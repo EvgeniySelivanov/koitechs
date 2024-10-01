@@ -89,8 +89,14 @@ const extraReducers = (builder) => {
 const usersSlice = createSlice({
   name: USER_SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    setUserNotFound: (state, action) => {
+      state.userNotFound = false;
+    },
+  },
   extraReducers,
 });
-
+export const {
+  setUserNotFound
+} = usersSlice.actions;
 export default usersSlice.reducer;
