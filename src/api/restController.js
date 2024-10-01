@@ -3,18 +3,14 @@ const http = axios.create({
   baseURL: ' https://api.github.com/',
 });
 
-
-
 export const getUser = async (data) => {
-  console.log('getUser', data);
   try {
     const response = await http.get(`users/${data}`, {
       headers: {
         'Content-Type': 'application/json',
-      
       },
     });
-    console.log('getUser', response);
+
     return response;
   } catch (error) {
     console.log(error);
@@ -23,15 +19,13 @@ export const getUser = async (data) => {
 };
 
 export const getUserRepos = async (data) => {
-  console.log('getUserRepos', data);
   try {
     const response = await http.get(`users/${data}/repos`, {
       headers: {
         'Content-Type': 'application/json',
-      
       },
     });
-    console.log('getUserRepos', response);
+
     return response;
   } catch (error) {
     console.log(error);
@@ -43,10 +37,9 @@ export const getUserReposLanguages = async (repo) => {
     const response = await http.get(`${repo}`, {
       headers: {
         'Content-Type': 'application/json',
-      
       },
     });
-    console.log('getUserReposLanguages', response);
+
     return response;
   } catch (error) {
     console.log(error);

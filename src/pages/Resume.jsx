@@ -21,7 +21,7 @@ const Resume = () => {
     value: parseFloat(item.percentage.replace(',', '.')),
     label: item.language,
   }));
-  console.log(user);
+
   const formattedDate = new Date(user.created_at).toLocaleString('ru-RU', {
     day: '2-digit',
     month: '2-digit',
@@ -102,13 +102,15 @@ const Resume = () => {
               position: { vertical: 'top', horizontal: 'middle' },
             }}
           />
+           <Box component='p'>User Repositories</Box>
              <TableContainer component={Paper}>
+             
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Имя репозитория</TableCell>
-            <TableCell>Дата обновления</TableCell>
-            <TableCell>Ссылка на репозиторий</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Link</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

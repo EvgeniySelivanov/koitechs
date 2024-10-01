@@ -6,7 +6,7 @@ const USER_SLICE_NAME = 'user';
 const initialState = {
   user: [],
   languages: [],
-  sortedRepos:[],
+  sortedRepos: [],
   userNotFound: false,
 };
 
@@ -16,7 +16,6 @@ export const getUser = createAsyncThunk(
     try {
       const { data, status } = await restController.getUser(payload);
       const result = { data, status };
-      console.log(result);
       return result;
     } catch (error) {
       console.log(error);
@@ -31,18 +30,14 @@ export const userReposLanguages = createAsyncThunk(
   async (username, thunkAPI) => {
     try {
       const reposResponse = await restController.getUserRepos(username);
-      console.log(reposResponse);
       const repos = reposResponse.data;
       const sortedRepos = repos
-          .filter(repo => repo.private === false) 
-          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-       
+        .filter((repo) => repo.private === false)
+        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
       const languagePromises = repos.map((repo) =>
-        restController.getUserReposLanguages( repo.languages_url)
+        restController.getUserReposLanguages(repo.languages_url)
       );
       const languagesData = await Promise.all(languagePromises);
-console.log(languagesData);
-
       const totalLanguages = {};
       languagesData.forEach((languages) => {
         for (let [language, bytes] of Object.entries(languages.data)) {
@@ -63,7 +58,7 @@ console.log(languagesData);
         }
       );
 
-      return {languagePercentages,sortedRepos};
+      return { languagePercentages, sortedRepos };
     } catch (error) {
       const { rejectWithValue } = thunkAPI;
       return rejectWithValue(error);
@@ -85,8 +80,6 @@ const extraReducers = (builder) => {
   builder
     .addCase(userReposLanguages.pending, pendingReducer)
     .addCase(userReposLanguages.fulfilled, (state, action) => {
-      console.log(action.payload);
-      
       state.languages = action.payload.languagePercentages;
       state.sortedRepos = action.payload.sortedRepos;
     })
