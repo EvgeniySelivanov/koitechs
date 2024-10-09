@@ -3,7 +3,12 @@ import { Stack, Box, Button, TextField } from '@mui/material';
 import { getUser,userReposLanguages,setUserNotFound } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Test from './Test';
 const Home = () => {
+  const products = [
+    { id: 1, name: 'Product 1', price: 200, rating: 4.5 },
+    { id: 2, name: 'Product 2', price: 150, rating: 3.5 },
+  ];
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
@@ -35,6 +40,7 @@ const Home = () => {
       <Button variant="contained" onClick={handleButtonClick}>
         Find user
       </Button>
+      <Test products={products}/>
     </Stack>
   );
 };
