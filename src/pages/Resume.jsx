@@ -15,7 +15,9 @@ import {
   Link,
 } from '@mui/material';
 const Resume = () => {
-  const { user, userNotFound, languages,sortedRepos } = useSelector((state) => state.user);
+  const { user, userNotFound, languages, sortedRepos } = useSelector(
+    (state) => state.user
+  );
   const dataForDiagram = languages.map((item, index) => ({
     id: index,
     value: parseFloat(item.percentage.replace(',', '.')),
@@ -95,39 +97,44 @@ const Resume = () => {
               },
             ]}
             height={300}
-            margin={{ top: 100}}
-            sx={{ width: 'calc(100% - 40px)', maxWidth: '600px'}}
+            margin={{ top: 100 }}
+            sx={{ width: 'calc(100% - 40px)', maxWidth: '600px' }}
             legend={{
               direction: 'row',
               position: { vertical: 'top', horizontal: 'middle' },
             }}
           />
-           <Box component='p'>User Repositories</Box>
-             <TableContainer component={Paper}>
-             
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Link</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {sortedRepos.map((repo) => (
-            <TableRow key={repo.id}>
-              <TableCell>{repo.name}</TableCell>
-              <TableCell>{new Date(repo.updated_at).toLocaleDateString()}</TableCell>
-              <TableCell>
-                <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                  {repo.html_url}
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          <Box component="p">User Repositories</Box>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Link</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sortedRepos.map((repo) => (
+                  <TableRow key={repo.id}>
+                    <TableCell>{repo.name}</TableCell>
+                    <TableCell>
+                      {new Date(repo.updated_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <Link
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {repo.html_url}
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Stack>
       ) : (
         <Box
